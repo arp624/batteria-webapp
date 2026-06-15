@@ -15,7 +15,7 @@
       background: #0d1117;
       color: #e6edf3;
       min-height: 100vh;
-      padding-bottom: calc(70px + env(safe-area-inset-bottom, 0px));
+      padding-bottom: 80px;
     }
 
     /* HEADER */
@@ -53,54 +53,43 @@
     }
 
     /* CONTENT */
-    .content {
-      padding: 16px;
-      max-width: 540px;
-      margin: 0 auto;
-      width: 100%;
-    }
+    .content { padding: 20px 16px; max-width: 480px; margin: 0 auto; }
 
     /* CARD */
     .card {
       background: #161b22;
       border: 1px solid #21262d;
       border-radius: 16px;
-      padding: 16px;
-      margin-bottom: 14px;
+      padding: 20px;
+      margin-bottom: 16px;
     }
     .card-title {
-      font-size: 11px;
+      font-size: 12px;
       color: #8b949e;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
 
     /* GAUGE */
-    .gauge-wrap { text-align: center; padding: 4px 0; }
-    .gauge-svg {
-      display: block;
-      margin: 0 auto;
-      width: 100%;
-      max-width: 260px;
-      height: auto;
-    }
+    .gauge-wrap { text-align: center; padding: 8px 0; }
+    .gauge-svg { display: block; margin: 0 auto; }
     .gauge-percent {
-      font-size: clamp(32px, 8vw, 52px);
+      font-size: 42px;
       font-weight: 700;
       text-align: center;
-      margin-top: -4px;
+      margin-top: -8px;
       transition: color 0.5s;
     }
     .gauge-voltage {
-      font-size: clamp(22px, 5vw, 32px);
+      font-size: 28px;
       font-weight: 500;
       text-align: center;
       margin-top: 4px;
       color: #e6edf3;
     }
     .gauge-status {
-      font-size: clamp(13px, 3vw, 16px);
+      font-size: 15px;
       text-align: center;
       margin-top: 6px;
       font-weight: 500;
@@ -110,47 +99,40 @@
     .metrics {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-bottom: 14px;
+      gap: 12px;
+      margin-bottom: 16px;
     }
     .metric {
       background: #161b22;
       border: 1px solid #21262d;
       border-radius: 12px;
-      padding: 12px;
+      padding: 14px;
     }
     .metric-label {
-      font-size: clamp(10px, 2.5vw, 12px);
+      font-size: 11px;
       color: #8b949e;
-      margin-bottom: 5px;
+      margin-bottom: 6px;
     }
     .metric-value {
-      font-size: clamp(18px, 4vw, 24px);
+      font-size: 22px;
       font-weight: 600;
     }
 
     /* CHART */
-    .chart-wrap {
-      position: relative;
-      width: 100%;
-      height: clamp(120px, 25vw, 200px);
-    }
-    canvas {
-      width: 100% !important;
-      height: 100% !important;
-    }
+    .chart-wrap { position: relative; height: 140px; }
+    canvas { width: 100% !important; height: 140px !important; }
 
     /* ALERT BAR */
     .alert-bar {
       background: #2d1b1b;
       border: 1px solid #c0392b;
       border-radius: 12px;
-      padding: 12px 14px;
-      margin-bottom: 14px;
+      padding: 14px 16px;
+      margin-bottom: 16px;
       display: none;
       align-items: center;
       gap: 10px;
-      font-size: clamp(13px, 3vw, 15px);
+      font-size: 14px;
       color: #ff6b6b;
       font-weight: 500;
     }
@@ -159,10 +141,10 @@
     /* CONNECT BUTTON */
     .btn-connect {
       width: 100%;
-      padding: clamp(12px, 3vw, 18px);
+      padding: 16px;
       border-radius: 14px;
       border: none;
-      font-size: clamp(14px, 3.5vw, 17px);
+      font-size: 16px;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.2s;
@@ -182,25 +164,25 @@
       border-bottom: 1px solid #21262d;
     }
     .setting-row:last-child { border-bottom: none; }
-    .setting-label { font-size: clamp(13px, 3vw, 15px); color: #8b949e; }
-    .setting-value { font-size: clamp(13px, 3vw, 15px); font-weight: 500; }
+    .setting-label { font-size: 14px; color: #8b949e; }
+    .setting-value { font-size: 14px; font-weight: 500; }
 
     /* SOGLIE */
     .soglia-row {
       display: flex;
       align-items: center;
       gap: 10px;
-      padding: 5px 0;
+      padding: 6px 0;
     }
     .soglia-dot {
       width: 10px; height: 10px;
       border-radius: 50%;
       flex-shrink: 0;
     }
-    .soglia-perc { font-size: clamp(12px, 2.5vw, 14px); font-weight: 600; width: 44px; }
-    .soglia-volt { font-size: clamp(11px, 2.5vw, 13px); color: #8b949e; }
+    .soglia-perc { font-size: 13px; font-weight: 600; width: 48px; }
+    .soglia-volt { font-size: 13px; color: #8b949e; }
 
-    /* BOTTOM NAV — mobile */
+    /* BOTTOM NAV */
     .bottom-nav {
       position: fixed;
       bottom: 0; left: 0; right: 0;
@@ -208,26 +190,25 @@
       border-top: 1px solid #21262d;
       display: flex;
       justify-content: space-around;
-      padding: 8px 0 env(safe-area-inset-bottom, 16px);
+      padding: 10px 0 20px;
       z-index: 100;
     }
     .nav-item {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 3px;
+      gap: 4px;
       cursor: pointer;
-      padding: 4px 12px;
+      padding: 4px 16px;
       border-radius: 8px;
       border: none;
       background: none;
       color: #8b949e;
       transition: color 0.2s;
-      min-width: 60px;
     }
     .nav-item.active { color: #1D9E75; }
     .nav-item svg { width: 22px; height: 22px; }
-    .nav-item span { font-size: clamp(9px, 2vw, 11px); }
+    .nav-item span { font-size: 11px; }
 
     /* PAGES */
     .page { display: none; }
@@ -238,10 +219,9 @@
       width: 100%;
       accent-color: #1D9E75;
       margin: 12px 0;
-      height: 6px;
     }
     .slider-val {
-      font-size: clamp(28px, 7vw, 42px);
+      font-size: 36px;
       font-weight: 700;
       color: #1D9E75;
       margin-bottom: 4px;
@@ -249,63 +229,10 @@
 
     /* INFO */
     .info-text {
-      font-size: clamp(12px, 2.5vw, 14px);
+      font-size: 13px;
       color: #8b949e;
       line-height: 1.6;
       margin-top: 8px;
-    }
-
-    /* ── TABLET (≥ 600px) ─────────────────────────────────── */
-    @media (min-width: 600px) {
-      .content { padding: 24px 20px; max-width: 680px; }
-      .card { padding: 24px; margin-bottom: 18px; }
-      .metrics { grid-template-columns: repeat(4, 1fr); gap: 14px; }
-      .chart-wrap { height: 200px; }
-      .bottom-nav { padding: 10px 0 16px; }
-    }
-
-    /* ── DESKTOP (≥ 900px) ────────────────────────────────── */
-    @media (min-width: 900px) {
-      body { padding-bottom: 0; padding-left: 220px; }
-
-      /* Sidebar verticale al posto della bottom nav */
-      .bottom-nav {
-        position: fixed;
-        top: 0; left: 0; bottom: 0; right: auto;
-        width: 220px;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: stretch;
-        border-top: none;
-        border-right: 1px solid #21262d;
-        padding: 80px 12px 24px;
-        gap: 4px;
-      }
-      .nav-item {
-        flex-direction: row;
-        justify-content: flex-start;
-        gap: 12px;
-        padding: 12px 16px;
-        border-radius: 10px;
-        min-width: unset;
-        width: 100%;
-      }
-      .nav-item span { font-size: 14px; }
-      .nav-item.active { background: #1a2d25; }
-
-      /* Header più largo */
-      .header { padding-left: 240px; }
-
-      /* Layout a due colonne su desktop */
-      .content { max-width: 900px; padding: 28px 24px; }
-      .desktop-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 18px;
-        align-items: start;
-      }
-      .desktop-grid .card { margin-bottom: 0; }
-      .chart-wrap { height: 240px; }
     }
   </style>
 </head>
@@ -331,13 +258,11 @@
       ⚠️ <span id="alertMsg">Batteria scarica!</span>
     </div>
 
-    <div class="desktop-grid">
-
     <!-- Gauge card -->
     <div class="card">
       <div class="card-title">Stato di carica</div>
       <div class="gauge-wrap">
-        <svg class="gauge-svg" viewBox="0 0 200 110">
+        <svg class="gauge-svg" viewBox="0 0 200 110" width="200" height="110">
           <!-- Traccia sfondo -->
           <path d="M20 100 A80 80 0 0 1 180 100"
             fill="none" stroke="#21262d" stroke-width="16" stroke-linecap="round"/>
@@ -352,7 +277,6 @@
       </div>
     </div>
 
-    <div>
     <!-- Metriche -->
     <div class="metrics">
       <div class="metric">
@@ -377,9 +301,6 @@
     <button class="btn-connect" id="btnConnect" onclick="toggleConnect()">
       🔵 Connetti a BattMonitor-Auto
     </button>
-    </div><!-- /col destra -->
-
-    </div><!-- /desktop-grid -->
 
   </div><!-- /page-home -->
 
@@ -437,57 +358,32 @@
       <div class="soglia-row">
         <div class="soglia-dot" style="background:#1D9E75"></div>
         <div class="soglia-perc">100%</div>
-        <div class="soglia-volt">≥ 13.00V — Piena</div>
+        <div class="soglia-volt">≥ 12.80V — Piena</div>
       </div>
       <div class="soglia-row">
         <div class="soglia-dot" style="background:#27ae60"></div>
-        <div class="soglia-perc">90%</div>
-        <div class="soglia-volt">≥ 12.76V — Ottima</div>
-      </div>
-      <div class="soglia-row">
-        <div class="soglia-dot" style="background:#57d98a"></div>
-        <div class="soglia-perc">80%</div>
-        <div class="soglia-volt">≥ 12.51V — Ottima</div>
+        <div class="soglia-perc">75%</div>
+        <div class="soglia-volt">≥ 12.60V — Buona</div>
       </div>
       <div class="soglia-row">
         <div class="soglia-dot" style="background:#f1c40f"></div>
-        <div class="soglia-perc">70%</div>
-        <div class="soglia-volt">≥ 12.31V — Buona</div>
-      </div>
-      <div class="soglia-row">
-        <div class="soglia-dot" style="background:#f39c12"></div>
-        <div class="soglia-perc">60%</div>
-        <div class="soglia-volt">≥ 12.15V — Buona</div>
+        <div class="soglia-perc">50%</div>
+        <div class="soglia-volt">≥ 12.40V — Discreta</div>
       </div>
       <div class="soglia-row">
         <div class="soglia-dot" style="background:#e67e22"></div>
-        <div class="soglia-perc">50%</div>
-        <div class="soglia-volt">≥ 12.06V — Discreta</div>
-      </div>
-      <div class="soglia-row">
-        <div class="soglia-dot" style="background:#d35400"></div>
-        <div class="soglia-perc">40%</div>
-        <div class="soglia-volt">≥ 11.94V — Mediocre</div>
+        <div class="soglia-perc">25%</div>
+        <div class="soglia-volt">≥ 12.20V — Bassa</div>
       </div>
       <div class="soglia-row">
         <div class="soglia-dot" style="background:#e74c3c"></div>
-        <div class="soglia-perc">30%</div>
-        <div class="soglia-volt">≥ 11.80V — Mediocre</div>
+        <div class="soglia-perc">10%</div>
+        <div class="soglia-volt">≥ 12.00V — Critica</div>
       </div>
       <div class="soglia-row">
         <div class="soglia-dot" style="background:#c0392b"></div>
-        <div class="soglia-perc">20%</div>
-        <div class="soglia-volt">≥ 11.68V — Critica</div>
-      </div>
-      <div class="soglia-row">
-        <div class="soglia-dot" style="background:#922b21"></div>
-        <div class="soglia-perc">10%</div>
-        <div class="soglia-volt">≥ 11.50V — Critica</div>
-      </div>
-      <div class="soglia-row">
-        <div class="soglia-dot" style="background:#641e16"></div>
         <div class="soglia-perc">0%</div>
-        <div class="soglia-volt">&lt; 11.48V — SCARICA</div>
+        <div class="soglia-volt">&lt; 12.00V — SCARICA</div>
       </div>
     </div>
   </div><!-- /page-notifiche -->
@@ -584,54 +480,24 @@ function updateSlider(val) {
 
 // ── Colore in base alla % ────────────────────────────────────
 function getColor(percent) {
-  if (percent >= 90) return '#1D9E75';
-  if (percent >= 70) return '#27ae60';
-  if (percent >= 50) return '#f1c40f';
-  if (percent >= 30) return '#e67e22';
-  if (percent >= 10) return '#e74c3c';
+  if (percent >= 75) return '#1D9E75';
+  if (percent >= 50) return '#27ae60';
+  if (percent >= 25) return '#f1c40f';
+  if (percent >= 10) return '#e67e22';
   return '#c0392b';
 }
 
 // ── Aggiorna gauge SVG ───────────────────────────────────────
-// La gauge è un semicerchio da sinistra (180°) a destra (0°)
-// cx=100, cy=100, r=80
-// Punto di partenza: (20, 100) — estremo sinistro
-// Punto di fine al 100%: (180, 100) — estremo destro
 function updateGauge(percent, color) {
-  const path = document.getElementById('gaugePath');
+  const angle = (percent / 100) * Math.PI;
   const cx = 100, cy = 100, r = 80;
-
-  // Caso 0%: arco invisibile (punto su punto)
-  if (percent <= 0) {
-    path.setAttribute('d', `M${cx - r} ${cy} A${r} ${r} 0 0 1 ${cx - r} ${cy}`);
-    path.setAttribute('stroke', color);
-    return;
-  }
-
-  // Caso 100%: arco completo — usiamo due semicerchi per evitare
-  // il problema SVG in cui start == end annulla l'arco
-  if (percent >= 100) {
-    const mid = cx; // punto intermedio in cima (100, 20)
-    const midY = cy - r;
-    path.setAttribute('d',
-      `M${cx - r} ${cy} A${r} ${r} 0 0 1 ${mid} ${midY} A${r} ${r} 0 0 1 ${cx + r} ${cy}`);
-    path.setAttribute('stroke', color);
-    return;
-  }
-
-  // Angolo: 0% = 180° (sinistra), 100% = 0° (destra)
-  // Convertiamo percent in radianti partendo da sinistra
-  const angleRad = Math.PI - (percent / 100) * Math.PI;
-  const endX = cx + r * Math.cos(angleRad);
-  const endY = cy - r * Math.sin(angleRad);
-
-  // large-arc-flag = 1 se l'arco supera i 180° (cioè > 50%)
-  // Ma siccome il nostro arco massimo è esattamente 180°,
-  // large-arc = 1 solo se percent > 50
-  const largeArc = percent > 50 ? 1 : 0;
-
-  const d = `M${cx - r} ${cy} A${r} ${r} 0 ${largeArc} 1 ${endX.toFixed(3)} ${endY.toFixed(3)}`;
-  path.setAttribute('d', d);
+  const startX = cx - r, startY = cy;
+  const endX = cx + r * Math.cos(Math.PI - angle);
+  const endY = cy - r * Math.sin(angle);
+  const large = angle > Math.PI / 2 ? 1 : 0;
+  const d = `M${startX} ${startY} A${r} ${r} 0 ${large} 1 ${endX.toFixed(2)} ${endY.toFixed(2)}`;
+  const path = document.getElementById('gaugePath');
+  path.setAttribute('d', percent > 0 ? d : `M${startX} ${startY} A${r} ${r} 0 0 1 ${startX} ${startY}`);
   path.setAttribute('stroke', color);
 }
 
