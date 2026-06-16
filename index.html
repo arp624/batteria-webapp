@@ -6,7 +6,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes"/>
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
   <meta name="theme-color" content="#0d1117"/>
-  <title>Monitor Batteria Fiat Ducato</title>
+  <title>BattMonitor Auto</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -313,7 +313,7 @@
 
 <!-- HEADER -->
 <div class="header">
-  <h1>🔋 <span>Monitor Batt.</span>FIAT Ducato</h1>
+  <h1>🔋 <span>Batt</span>Monitor Auto</h1>
   <div class="ble-status">
     <div class="ble-dot" id="bleDot"></div>
     <span id="bleStatusText">Non connesso</span>
@@ -338,13 +338,17 @@
       <div class="card-title">Stato di carica</div>
       <div class="gauge-wrap">
         <svg class="gauge-svg" viewBox="0 0 200 110">
-          <!-- Traccia sfondo -->
-          <path d="M20 100 A80 80 0 0 1 180 100"
-            fill="none" stroke="#21262d" stroke-width="16" stroke-linecap="round"/>
-          <!-- Traccia carica -->
-          <path id="gaugePath" d="M20 100 A80 80 0 0 1 20 100"
-            fill="none" stroke="#1D9E75" stroke-width="16" stroke-linecap="round"
-            style="transition: all 0.8s ease;"/>
+          <!-- Traccia sfondo: semicerchio fisso da sinistra a destra -->
+          <circle cx="100" cy="100" r="80" fill="none"
+            stroke="#21262d" stroke-width="16" stroke-linecap="round"
+            stroke-dasharray="251.327 251.327"
+            transform="rotate(-180 100 100)"/>
+          <!-- Traccia carica: stessa geometria, dasharray animato via JS -->
+          <circle id="gaugePath" cx="100" cy="100" r="80" fill="none"
+            stroke="#1D9E75" stroke-width="16" stroke-linecap="round"
+            stroke-dasharray="0 502.655"
+            transform="rotate(-180 100 100)"
+            style="transition: stroke-dasharray 0.8s ease, stroke 0.5s ease;"/>
         </svg>
         <div class="gauge-percent" id="gaugePercent" style="color:#1D9E75">--%</div>
         <div class="gauge-voltage" id="gaugeVoltage">--.- V</div>
@@ -375,7 +379,7 @@
 
     <!-- Pulsante connessione -->
     <button class="btn-connect" id="btnConnect" onclick="toggleConnect()">
-      🔵 Connetti a Monitor Batt. Fiat Ducato
+      🔵 Connetti a BattMonitor-Auto
     </button>
     </div><!-- /col destra -->
 
@@ -597,42 +601,23 @@ function getColor(percent) {
 // cx=100, cy=100, r=80
 // Punto di partenza: (20, 100) — estremo sinistro
 // Punto di fine al 100%: (180, 100) — estremo destro
+// ── Aggiorna gauge SVG ───────────────────────────────────────
+// Tecnica stroke-dasharray su cerchio completo:
+// r=80 → circonferenza totale = 2*PI*80 = 502.655
+// Il semicerchio visibile = 251.327 (metà circonferenza)
+// La parte colorata = percent% del semicerchio
+// Il circle è ruotato di -180° così parte da sinistra
 function updateGauge(percent, color) {
-  const path = document.getElementById('gaugePath');
-  const cx = 100, cy = 100, r = 80;
+  const circle = document.getElementById('gaugePath');
+  const r = 80;
+  const circ      = 2 * Math.PI * r;   // 502.655 — cerchio completo
+  const semi      = circ / 2;           // 251.327 — semicerchio visibile
+  const p         = Math.max(0, Math.min(100, percent));
+  const colorata  = (p / 100) * semi;   // lunghezza arco colorato
+  const resto     = circ - colorata;    // gap (parte nascosta)
 
-  // Caso 0%: arco invisibile (punto su punto)
-  if (percent <= 0) {
-    path.setAttribute('d', `M${cx - r} ${cy} A${r} ${r} 0 0 1 ${cx - r} ${cy}`);
-    path.setAttribute('stroke', color);
-    return;
-  }
-
-  // Caso 100%: arco completo — usiamo due semicerchi per evitare
-  // il problema SVG in cui start == end annulla l'arco
-  if (percent >= 100) {
-    const mid = cx; // punto intermedio in cima (100, 20)
-    const midY = cy - r;
-    path.setAttribute('d',
-      `M${cx - r} ${cy} A${r} ${r} 0 0 1 ${mid} ${midY} A${r} ${r} 0 0 1 ${cx + r} ${cy}`);
-    path.setAttribute('stroke', color);
-    return;
-  }
-
-  // Angolo: 0% = 180° (sinistra), 100% = 0° (destra)
-  // Convertiamo percent in radianti partendo da sinistra
-  const angleRad = Math.PI - (percent / 100) * Math.PI;
-  const endX = cx + r * Math.cos(angleRad);
-  const endY = cy - r * Math.sin(angleRad);
-
-  // large-arc-flag = 1 se l'arco supera i 180° (cioè > 50%)
-  // Ma siccome il nostro arco massimo è esattamente 180°,
-  // large-arc = 1 solo se percent > 50
-  const largeArc = percent > 50 ? 1 : 0;
-
-  const d = `M${cx - r} ${cy} A${r} ${r} 0 ${largeArc} 1 ${endX.toFixed(3)} ${endY.toFixed(3)}`;
-  path.setAttribute('d', d);
-  path.setAttribute('stroke', color);
+  circle.setAttribute('stroke-dasharray', `${colorata.toFixed(3)} ${resto.toFixed(3)}`);
+  circle.setAttribute('stroke', color);
 }
 
 // ── Aggiorna UI con nuovi dati ───────────────────────────────
